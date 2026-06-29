@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-editorial: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-clay: #5c4a3e;
+  --color-earth: #faf9f5; /* Light cream background */
+  --color-charcoal: #141311; /* Dark charcoal text */
+  --color-parchment: #f4f3ee; /* Soft sand gray background */
+  --color-ochre: #84623f; /* Muted brown-gold accent */
+  --color-redthread: #9c2a2a; /* Deep crimson thread */
+}
+
+/* Custom selection */
+::selection {
+  background-color: var(--color-charcoal);
+  color: var(--color-earth);
+}
+
+/* Scrollbar hidden */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Noise texture on the light canvas */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Beautiful light-mode glass overlay for cards/modals */
+.glass-overlay {
+  background: rgba(244, 243, 238, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(20, 19, 17, 0.08);
+}
+
+/* Smooth line transition animations */
+.thread-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.1s ease;
+}
+
+/* Hotspot pulse effect matching the new theme */
+@keyframes pulse-glow {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(20, 19, 17, 0.25);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(20, 19, 17, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(20, 19, 17, 0);
+  }
+}
+
+.hotspot-pulse {
+  animation: pulse-glow 2.2s infinite;
+}
