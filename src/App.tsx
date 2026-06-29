@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, FormEvent } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -16,6 +16,11 @@ import {
   Heart
 } from 'lucide-react';
 
+import leafChildhood from './assets/images/leaf_childhood_1782754509707.jpg';
+import leafSecond from './assets/images/leaf_second_1782754521406.jpg';
+import leafThird from './assets/images/leaf_third_1782754536236.jpg';
+import mapEmbroidered from './assets/images/map_embroidered_1782754549731.jpg';
+
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +32,7 @@ interface ModalContent {
   quote: string;
   narrative: string;
   metadata: string;
-  interactiveType: 'breathing' | 'scratch' | 'birthmark' | 'rivers';
+  interactiveType: 'breathing' | 'veins' | 'birthmark' | 'rivers';
 }
 
 // Poetic narratives for hotspots
@@ -46,9 +51,9 @@ const MODAL_DATA: Record<string, ModalContent> = {
     title: 'Voces de la Ascendencia Indígena',
     subtitle: 'LA TRANSMISIÓN SUSURRADA EN LA COCINA',
     quote: '"Del lado de mi madre, la historia se cuenta en voz baja, en la cocina, mientras se cuela el café."',
-    narrative: 'No hay partidas coloniales que registren la sangre charrúa de mi linaje, ni blasones de frontera. Solo la certeza oral de que venimos de la tierra de los ríos del norte, allí donde el río Uruguay se ensancha. "Tu abuela tenía el cabello tan oscuro que brillaba azul bajo el sol, y curaba el empacho con hojas de duraznillo", me decía mamá. Esa transmisión oral es nuestro único pergamino. No busco una prueba de filiación racial o de pureza de sangre; busco habitar un silencio de generaciones, los que fueron borrados de las actas oficiales para convertirse en peones, sirvientes, o simplemente vacíos en el relato oficial de un Uruguay que decidió declararse europeo.',
+    narrative: 'No hay partidas coloniales que registren la sangre charrúa de mi linaje, ni blasones de frontera. Solo la certeza oral de que venimos de la tierra de los ríos del norte, allí donde el río Uruguay se ensancha. "Tu abuela tenía el cabello tan oscuro que brillaba azul bajo el sol, y curaba el empacho con hojas de duraznillo", me decía mamá. Esa transmisión oral es nuestro único pergamino. Al interactuar con el lienzo, haz múltiples clics para dibujar y expandir las nervaduras de la planta en hilos rojos, simbolizando las ramas de la memoria ausente y la herencia de sangre que fluye invisible.',
     metadata: 'REGISTRO 02 — PARTIDAS IMPOSIBLES / EL SILENCIO COLONIAL',
-    interactiveType: 'scratch'
+    interactiveType: 'veins'
   },
   marcas: {
     id: 'marcas',
@@ -233,6 +238,55 @@ export default function App() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [isIntroDismissed, setIsIntroDismissed] = useState(false);
 
+  // Collective Archive State
+  const [userMemoryText, setUserMemoryText] = useState('');
+  const [collectiveMemories, setCollectiveMemories] = useState<{ id: string; text: string; date: string }[]>(() => {
+    const saved = localStorage.getItem('ausente_collective_memories');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // ignore
+      }
+    }
+    return [
+      {
+        id: '1',
+        text: 'En mi casa tampoco hay fotos de casamiento. Solo una cuchara de plata grabada con iniciales que nadie sabe de quién son. Mi abuela decía que venía de Salto.',
+        date: 'Hace un día'
+      },
+      {
+        id: '2',
+        text: 'Heredé los ojos almendrados y el silencio largo de las tardes calurosas de Tacuarembó. Mamá me enseñó que cuando no hay papeles, el canto de los pájaros de monte cuenta la historia.',
+        date: 'Hace 3 días'
+      },
+      {
+        id: '3',
+        text: 'Encontramos un manuscrito detrás de un marco viejo en la casa de Bella Unión. Solo decía: "No te olvides de cruzar el río". No tenía firma ni remitente.',
+        date: 'Hace una semana'
+      }
+    ];
+  });
+
+  const handleAddMemory = (e: FormEvent) => {
+    e.preventDefault();
+    if (!userMemoryText.trim()) return;
+    const newMemory = {
+      id: Date.now().toString(),
+      text: userMemoryText.trim(),
+      date: 'Ahora'
+    };
+    const updated = [newMemory, ...collectiveMemories];
+    setCollectiveMemories(updated);
+    localStorage.setItem('ausente_collective_memories', JSON.stringify(updated));
+    setUserMemoryText('');
+    
+    // Play sound on submit
+    if (isPlayingSound) {
+      audioInstance.playChime();
+    }
+  };
+
   // References
   const containerRef = useRef<HTMLDivElement>(null);
   const threadSvgRef = useRef<SVGSVGElement>(null);
@@ -243,12 +297,6 @@ export default function App() {
   const scratchCanvasRef = useRef<HTMLCanvasElement>(null);
   const birthmarkCanvasRef = useRef<HTMLCanvasElement>(null);
   const riversCanvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Images imported from assets
-  const leafChildhood = '/src/assets/images/leaf_childhood_1782754509707.jpg';
-  const leafSecond = '/src/assets/images/leaf_second_1782754521406.jpg';
-  const leafThird = '/src/assets/images/leaf_third_1782754536236.jpg';
-  const mapEmbroidered = '/src/assets/images/map_embroidered_1782754549731.jpg';
 
   // Toggle Atmospheric Sound engine
   const handleToggleSound = () => {
@@ -385,9 +433,9 @@ export default function App() {
         }
       });
 
-      // 4. Chemical Morph (Crossfade) transition on Scroll (Section II)
+      // 4. Chlorophyll Chlorotypia fade on Scroll (Section III)
       gsap.to(".chemical-overlay", {
-        opacity: 0.9,
+        opacity: 0,
         ease: "power1.inOut",
         scrollTrigger: {
           trigger: "#sec_revelado",
@@ -426,51 +474,169 @@ export default function App() {
   useEffect(() => {
     if (!activeModal) return;
 
-    // --- CASE 1: Scratch Off (Transmisión Oral) ---
-    if (activeModal.interactiveType === 'scratch' && scratchCanvasRef.current) {
+    // --- CASE 1: Veins Growth (Dibujar Nervaduras en Color Rojo al hacer click) ---
+    if (activeModal.interactiveType === 'veins' && scratchCanvasRef.current) {
       const canvas = scratchCanvasRef.current;
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        // High-DPI canvas fix
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
 
-        ctx.fillStyle = '#1c1b18';
+        // Clear canvas with a very soft organic ivory/cream color
+        ctx.fillStyle = '#f5ebd9';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#dfd7c3';
-        ctx.font = '12px "Space Grotesk", sans-serif';
+
+        // Draw a delicate faint pencil sketch of a leaf contour as an artistic guide
+        ctx.strokeStyle = 'rgba(28, 25, 23, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        const midX = canvas.width / 2;
+        const startY = canvas.height * 0.9;
+        const endY = canvas.height * 0.15;
+        // Central vein
+        ctx.moveTo(midX, startY);
+        ctx.lineTo(midX, endY);
+        // Leaf outlines
+        ctx.moveTo(midX, startY);
+        ctx.bezierCurveTo(midX - canvas.width * 0.45, startY * 0.7, midX - canvas.width * 0.4, endY * 1.5, midX, endY);
+        ctx.moveTo(midX, startY);
+        ctx.bezierCurveTo(midX + canvas.width * 0.45, startY * 0.7, midX + canvas.width * 0.4, endY * 1.5, midX, endY);
+        ctx.stroke();
+        ctx.setLineDash([]); // Reset line dash
+
+        // Poetic instruction watermark
+        ctx.fillStyle = '#8c7e6c';
+        ctx.font = '7.5px monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('ARRAS_TRA EL CURSOR AQUÍ PARA REVELAR LA MEMORIA', canvas.width / 2, canvas.height / 2);
+        ctx.fillText('HAZ MÚLTIPLES CLICS PARA BROTAR LAS NERVADURAS DE LA MEMORIA SANGUÍNEA', canvas.width / 2, canvas.height * 0.08);
 
-        const scratch = (x: number, y: number) => {
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.beginPath();
-          ctx.arc(x, y, 32, 0, Math.PI * 2);
-          ctx.fill();
-        };
+        interface Branch {
+          x: number;
+          y: number;
+          vx: number;
+          vy: number;
+          width: number;
+          length: number;
+          maxLength: number;
+          generation: number;
+        }
 
-        const handleMouseMove = (e: MouseEvent) => {
-          const rect = canvas.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          scratch(x, y);
-        };
+        let activeBranches: Branch[] = [];
 
-        const handleTouchMove = (e: TouchEvent) => {
-          if (e.touches.length > 0) {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.touches[0].clientX - rect.left;
-            const y = e.touches[0].clientY - rect.top;
-            scratch(x, y);
+        const spawnVeinSystem = (startX: number, startY: number) => {
+          if (isPlayingSound) {
+            audioInstance.playChime();
+          }
+
+          // Spawn main branches growing in random directions
+          const count = 3 + Math.floor(Math.random() * 3);
+          for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 1.0 + Math.random() * 1.2;
+            activeBranches.push({
+              x: startX,
+              y: startY,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              width: 2.2,
+              length: 0,
+              maxLength: 40 + Math.random() * 50,
+              generation: 1
+            });
           }
         };
 
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('touchmove', handleTouchMove);
+        let animId: number;
+        const updateAndDraw = () => {
+          const nextBranches: Branch[] = [];
+
+          activeBranches.forEach((b) => {
+            ctx.strokeStyle = '#a72d2d'; // Red thread color
+            ctx.lineWidth = b.width;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            const nextX = b.x + b.vx;
+            const nextY = b.y + b.vy;
+
+            ctx.beginPath();
+            ctx.moveTo(b.x, b.y);
+            ctx.lineTo(nextX, nextY);
+            ctx.stroke();
+
+            // Update branch state
+            b.x = nextX;
+            b.y = nextY;
+            b.length += Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+
+            // Organic curl / variation
+            const angle = Math.atan2(b.vy, b.vx) + (Math.random() - 0.5) * 0.35;
+            const speed = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+            b.vx = Math.cos(angle) * speed;
+            b.vy = Math.sin(angle) * speed;
+
+            if (b.length < b.maxLength) {
+              nextBranches.push(b);
+            } else if (b.generation < 3) {
+              // Split and spawn children
+              const splitAngle1 = angle - 0.35 - Math.random() * 0.3;
+              const splitAngle2 = angle + 0.35 + Math.random() * 0.3;
+              const childSpeed = speed * 0.85;
+
+              nextBranches.push({
+                x: b.x,
+                y: b.y,
+                vx: Math.cos(splitAngle1) * childSpeed,
+                vy: Math.sin(splitAngle1) * childSpeed,
+                width: b.width * 0.65,
+                length: 0,
+                maxLength: b.maxLength * 0.75,
+                generation: b.generation + 1
+              });
+
+              nextBranches.push({
+                x: b.x,
+                y: b.y,
+                vx: Math.cos(splitAngle2) * childSpeed,
+                vy: Math.sin(splitAngle2) * childSpeed,
+                width: b.width * 0.65,
+                length: 0,
+                maxLength: b.maxLength * 0.75,
+                generation: b.generation + 1
+              });
+            }
+          });
+
+          activeBranches = nextBranches;
+          animId = requestAnimationFrame(updateAndDraw);
+        };
+
+        animId = requestAnimationFrame(updateAndDraw);
+
+        const handleClick = (e: MouseEvent) => {
+          const rect = canvas.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+          spawnVeinSystem(clickX, clickY);
+        };
+
+        const handleTouchStart = (e: TouchEvent) => {
+          if (e.touches.length > 0) {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.touches[0].clientX - rect.left;
+            const clickY = e.touches[0].clientY - rect.top;
+            spawnVeinSystem(clickX, clickY);
+          }
+        };
+
+        canvas.addEventListener('click', handleClick);
+        canvas.addEventListener('touchstart', handleTouchStart);
+
         return () => {
-          canvas.removeEventListener('mousemove', handleMouseMove);
-          canvas.removeEventListener('touchmove', handleTouchMove);
+          cancelAnimationFrame(animId);
+          canvas.removeEventListener('click', handleClick);
+          canvas.removeEventListener('touchstart', handleTouchStart);
         };
       }
     }
@@ -1115,22 +1281,23 @@ export default function App() {
                   className="w-full h-full relative overflow-hidden shadow-[10px_10px_35px_rgba(0,0,0,0.06)] border border-charcoal/5"
                   style={{ borderRadius: "0% 100% 0% 100%", transform: "rotate(45deg) scale(0.95)" }}
                 >
-                  {/* Original childhood face leaf */}
+                  {/* Base childhood portrait printed on the leaf */}
                   <img 
                     src={leafChildhood} 
-                    alt="Retrato infantil original en la hoja" 
-                    className="absolute inset-0 w-full h-full object-cover grayscale-[25%] opacity-90"
+                    alt="Retrato infantil impreso como clorotipia" 
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[15%] sepia-[40%] contrast-[1.1]"
                     style={{ transform: "rotate(-45deg) scale(1.4)" }}
                     referrerPolicy="no-referrer"
                   />
 
-                  {/* Cursive manuscript leaf overlaying on scroll */}
-                  <img 
-                    src={leafSecond} 
-                    alt="Manuscrito que se revela" 
-                    className="chemical-overlay absolute inset-0 w-full h-full object-cover opacity-0 mix-blend-multiply"
+                  {/* Green fresh leaf chlorophyll overlays (representing unexposed fresh leaf state) */}
+                  <div 
+                    className="chemical-overlay absolute inset-0 bg-gradient-to-br from-[#274e13] via-[#38761d] to-[#1c3c0a] mix-blend-color opacity-100"
                     style={{ transform: "rotate(-45deg) scale(1.4)" }}
-                    referrerPolicy="no-referrer"
+                  />
+                  <div 
+                    className="chemical-overlay absolute inset-0 bg-[#0d2307] mix-blend-multiply opacity-85"
+                    style={{ transform: "rotate(-45deg) scale(1.4)" }}
                   />
 
                   {/* Delicate gradient vignette */}
@@ -1140,16 +1307,16 @@ export default function App() {
                 {/* Tech tag positioned cleanly outside leaf overlay */}
                 <div className="absolute -bottom-6 left-3 bg-parchment border border-charcoal/10 px-3 py-1 rounded-full text-[7px] font-mono tracking-widest text-ochre uppercase flex items-center gap-2 shadow-md">
                   <Sparkles size={9} className="text-ochre animate-spin" />
-                  <span>TRANSICIÓN QUÍMICA ACTIVA</span>
+                  <span>REVELADO DE CLOROTIPIA EN TIEMPO REAL</span>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-6 flex flex-col justify-center">
-              <span className="font-mono text-[8px] tracking-[0.2em] text-ochre uppercase mb-3 block">[ EL REVELADO VERTICAL ]</span>
-              <h3 className="font-serif text-3xl text-charcoal mb-5 leading-tight">La convivencia de dos tiempos</h3>
+              <span className="font-mono text-[8px] tracking-[0.2em] text-ochre uppercase mb-3 block">[ REVELADO DE CLOROTIPIA ]</span>
+              <h3 className="font-serif text-3xl text-charcoal mb-5 leading-tight">La luz solar como reactivo químico</h3>
               <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/70 mb-8">
-                A medida que te desplazas verticalmente por la página, el retrato infantil impreso se diluye orgánicamente sobre el tejido celular de la planta, dando paso a las caligrafías manuscritas del siglo XIX de juzgados coloniales del interior de Uruguay. La naturaleza asume la custodia del documento ausente.
+                Al desplazarte por la página, simulas la exposición solar sobre la hoja. La clorofila verde y viva reacciona y se desvanece lentamente bajo el reactivo de la luz, revelando el retrato infantil impreso sobre la superficie vegetal (clorotipia natural). El recuerdo, antes oculto e indocumentado, brota del propio tejido de la planta.
               </p>
               
               <div className="p-5 border-l-2 border-charcoal/30 bg-parchment/60 rounded-xl">
@@ -1173,17 +1340,13 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-7 flex justify-center items-center order-2 lg:order-1">
-              <div className="leaf-parallax-2 relative w-full max-w-sm aspect-[3/4] group transition-all duration-500">
-                {/* Rotated leaf mask */}
-                <div 
-                  className="w-full h-full relative overflow-hidden shadow-[10px_10px_35px_rgba(0,0,0,0.06)] border border-charcoal/5"
-                  style={{ borderRadius: "0% 100% 0% 100%", transform: "rotate(45deg) scale(0.95)" }}
-                >
+              <div className="leaf-parallax-2 relative w-full max-w-sm aspect-square group transition-all duration-500">
+                {/* Square image border container with rounded corners */}
+                <div className="w-full h-full relative overflow-hidden shadow-[10px_10px_35px_rgba(0,0,0,0.06)] border border-charcoal/10 rounded-2xl">
                   <img 
                     src={leafSecond} 
                     alt="Hojas del archivo vegetal impresas con letras de partidas manuscritas antiguas" 
                     className="w-full h-full object-cover grayscale-[10%] group-hover:scale-105 transition-transform duration-1000 ease-out"
-                    style={{ transform: "rotate(-45deg) scale(1.4)" }}
                     referrerPolicy="no-referrer"
                   />
                   
@@ -1372,7 +1535,82 @@ export default function App() {
         </section>
 
         {/* --------------------------------------------------------------------------------- */}
-        {/* SECCIÓN VII: POÉTICA FINAL / CATALOGO DE RESTOS */}
+        {/* SECCIÓN VII: EL RECIPIENTE DE LAS AUSENCIAS (El Archivo Vivo Colectivo) */}
+        {/* --------------------------------------------------------------------------------- */}
+        <section 
+          id="sec_archivo_vivo" 
+          className="fade-section w-full min-h-screen flex flex-col justify-center px-6 py-20 md:px-16 max-w-5xl mx-auto select-none"
+        >
+          <div className="flex flex-col gap-8 max-w-3xl mx-auto text-center mb-12">
+            <span className="font-mono text-[8px] tracking-[0.35em] text-ochre uppercase block">[ EL RECIPIENTE DE LAS AUSENCIAS ]</span>
+            <h2 className="font-display font-extrabold tracking-[-0.03em] uppercase text-4xl sm:text-5xl md:text-6xl text-charcoal leading-[0.95]">
+              EL ARCHIVO VIVO.
+            </h2>
+            <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/70">
+              Para quienes no heredamos un archivo de papel, cada fragmento recordado es un hilo en la reconstrucción ancestral. Deja aquí tu propio fragmento: un murmullo familiar, una marca heredada, una hoja curativa, o un silencio compartido. Este es nuestro recipiente colectivo de lo indocumentado, el archivo que resiste al margen de los juzgados coloniales.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-4xl mx-auto">
+            {/* Input Form Column */}
+            <form 
+              onSubmit={handleAddMemory}
+              className="lg:col-span-5 flex flex-col gap-4 p-6 rounded-2xl border border-charcoal/10 bg-parchment/60 backdrop-blur-sm shadow-sm"
+            >
+              <span className="font-mono text-[8px] text-ochre block uppercase tracking-widest font-bold">Inscribir Ausencia</span>
+              
+              <textarea
+                value={userMemoryText}
+                onChange={(e) => setUserMemoryText(e.target.value)}
+                placeholder="Escribe tu fragmento de memoria o ausencia familiar..."
+                rows={4}
+                onMouseEnter={() => { setIsCursorHovered(true); setCursorLabel('Escribir'); }}
+                onMouseLeave={() => { setIsCursorHovered(false); setCursorLabel(null); }}
+                className="w-full text-xs font-serif bg-parchment/40 border border-charcoal/15 focus:border-ochre/50 outline-none p-3.5 rounded-xl text-charcoal placeholder-charcoal/40 resize-none transition-colors"
+                maxLength={250}
+              />
+              
+              <div className="flex justify-between items-center text-[8px] font-mono text-charcoal/40">
+                <span>MÁXIMO 250 CARACTERES</span>
+                <span>{userMemoryText.length}/250</span>
+              </div>
+
+              <button
+                type="submit"
+                onMouseEnter={() => { setIsCursorHovered(true); setCursorLabel('Inscribir'); }}
+                onMouseLeave={() => { setIsCursorHovered(false); setCursorLabel(null); }}
+                className="w-full py-2.5 rounded-full border border-charcoal/20 bg-parchment hover:bg-charcoal hover:text-earth text-[8px] font-display uppercase tracking-[0.2em] font-bold cursor-none transition-all duration-300"
+              >
+                Inscribir en el archivo
+              </button>
+            </form>
+
+            {/* Live Memories List Column */}
+            <div className="lg:col-span-7 flex flex-col gap-4 h-[350px] overflow-y-auto pr-2 custom-scrollbar">
+              <span className="font-mono text-[8px] text-ochre block uppercase tracking-widest font-bold mb-1 sticky top-0 bg-[#f7f4ec]/95 py-1 z-10">Registros Recientes</span>
+              
+              <div className="flex flex-col gap-3">
+                {collectiveMemories.map((mem) => (
+                  <div 
+                    key={mem.id} 
+                    className="p-4 rounded-xl border border-charcoal/10 bg-parchment shadow-sm hover:border-ochre/30 transition-all duration-300 flex flex-col gap-2"
+                  >
+                    <p className="font-serif text-xs text-charcoal/85 leading-relaxed italic">
+                      "{mem.text}"
+                    </p>
+                    <div className="flex items-center justify-between text-[7px] font-mono text-charcoal/40 tracking-wider">
+                      <span>ORIGEN DOCUMENTADO POR EL AFECTO</span>
+                      <span>{mem.date}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --------------------------------------------------------------------------------- */}
+        {/* SECCIÓN VIII: POÉTICA FINAL / CATALOGO DE RESTOS */}
         {/* --------------------------------------------------------------------------------- */}
         <section 
           id="sec_final" 
@@ -1494,22 +1732,9 @@ export default function App() {
                   </div>
                 )}
 
-                {/* INTERACTIVE COMPONENT 2: SCRATCH OFF MEMORY MANUSCRIPT */}
-                {activeModal.interactiveType === 'scratch' && (
-                  <div className="w-full relative aspect-square rounded-2xl border border-charcoal/10 overflow-hidden shadow-inner">
-                    {/* Underlying cursive texture */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center filter sepia opacity-80" 
-                      style={{ backgroundImage: `url(${leafSecond})` }} 
-                    />
-                    {/* Hidden written transcription */}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center p-6 text-center bg-parchment/80 select-text">
-                      <span className="font-mono text-[8px] text-ochre tracking-widest uppercase mb-3">VOCES EXTRAS</span>
-                      <p className="font-serif text-xs text-charcoal leading-relaxed">
-                        "...mientras colaba café en la cocina de barro, mi abuela me miraba el pelo oscuro. Me decía que el agua del río Uruguay nos trajo de allá arriba, donde no hay actas oficiales."
-                      </p>
-                    </div>
-                    {/* Scratch canvas */}
+                {/* INTERACTIVE COMPONENT 2: PLANT VEINS BLOOD-RED THREAD DRAWING */}
+                {activeModal.interactiveType === 'veins' && (
+                  <div className="w-full relative aspect-square rounded-2xl border border-charcoal/10 overflow-hidden shadow-inner bg-[#f5ebd9]">
                     <canvas 
                       ref={scratchCanvasRef} 
                       className="absolute inset-0 w-full h-full cursor-crosshair relative z-20" 
