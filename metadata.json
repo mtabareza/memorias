@@ -1,0 +1,6 @@
+{
+  "name": "Antes del nombre",
+  "description": "Una pieza digital interactiva sobre memoria, ausencia de archivo y reconstrucción ancestral.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
