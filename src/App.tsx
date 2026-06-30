@@ -41,8 +41,8 @@ const MODAL_DATA: Record<string, ModalContent> = {
     id: 'manifiesto',
     title: 'Manifiesto del Archivo Ausente',
     subtitle: 'NUESTRA INFANCIA SIN PLACAS DE PLATA',
-    quote: '"Crecer sin fotos de la infancia es aprender a recordar con la luz apagada."',
-    narrative: 'En mi hogar no hay álbumes de cuero con bordes dorados, ni fotos de mi primer día de escuela, ni registros de mis abuelos sonriendo frente a una cámara analógica. Mi genealogía no es un árbol de raíces firmes; es una enredadera flotante. Para quienes no heredamos un archivo, la memoria no es un documento que se lee: es una arcilla que se amasa todos los días con lo que queda. El gomero de mi patio de la infancia, con sus hojas gruesas, carnosas y oscuras, fue el primer guardián de mi silencio. Si el papel familiar se quemó o nunca existió, las hojas vegetales recuerdan la savia que nos trajo hasta aquí. El archivo vegetal sustituye al archivo de papel.',
+    quote: '"Cuando la ausencia de imagen es una constante familiar, la memoria se agudiza en los elementos que pertenecieron a las vivencias."',
+    narrative: 'En mi hogar no hay álbumes de fotos de momentos epicos, ni fotos de mi primer día de escuela, ni registros de mis abuelos sonriendo frente a una cámara analógica. Mi genealogía se forjó como una enredadera flotante. Para quienes no heredamos un archivo, la memoria es una arcilla que se amasa todos los días y que de a poco va dejando rastros y huellas. El gomero que estaba en el patio, con sus hojas gruesas y oscuras, fue el primer observador de mis vivencias.',
     metadata: 'REGISTRO 01 — MEMORIA VEGETAL / EL GOMERO DE LA INFANCIA',
     interactiveType: 'breathing'
   },
@@ -50,8 +50,8 @@ const MODAL_DATA: Record<string, ModalContent> = {
     id: 'archivo',
     title: 'Voces de la Ascendencia Indígena',
     subtitle: 'LA TRANSMISIÓN SUSURRADA EN LA COCINA',
-    quote: '"Del lado de mi madre, la historia se cuenta en voz baja, en la cocina, mientras se cuela el café."',
-    narrative: 'No hay partidas coloniales que registren la sangre charrúa de mi linaje, ni blasones de frontera. Solo la certeza oral de que venimos de la tierra de los ríos del norte, allí donde el río Uruguay se ensancha. "Tu abuela tenía el cabello tan oscuro que brillaba azul bajo el sol, y curaba el empacho con hojas de duraznillo", me decía mamá. Esa transmisión oral es nuestro único pergamino. Al interactuar con el lienzo, haz múltiples clics para dibujar y expandir las nervaduras de la planta en hilos rojos, simbolizando las ramas de la memoria ausente y la herencia de sangre que fluye invisible.',
+    quote: '"Del lado de mi madre, la historia se cuenta a traves de los tejidos que realiza desde pequeña."',
+    narrative: 'No hay muchos documentos que registren esta herencia de la que estamos hablando. Solo la certeza oral de que venimos de la tierra de los ríos, por alla cerca de Durazno, en un pueblo tan perdido como los relatos que pude de a poco recolectar. Hoy, me atrevo a bordar con los hilos que ella misma armo los ovillos, para hablar de union, para hablar de sangre, para hablar de los rios que nos dan vida y nos unen en historias no solo a mi madre, a mis hermanos, sino a Sudamerica en comunidad.',
     metadata: 'REGISTRO 02 — PARTIDAS IMPOSIBLES / EL SILENCIO COLONIAL',
     interactiveType: 'veins'
   },
@@ -59,8 +59,8 @@ const MODAL_DATA: Record<string, ModalContent> = {
     id: 'marcas',
     title: 'El Archivo de la Piel',
     subtitle: 'LA MARCA QUE EXCEPCIONA AL DOCUMENTO',
-    quote: '"Heredé una mancha arcillosa en el cuello, una costura física contra el olvido."',
-    narrative: 'Hay una mancha de nacimiento de un color arcilloso, casi violeta, en la base del cuello. La tiene mi madre. La tiene mi hermano. La tengo yo. Ningún antropólogo oficial la consideraría una prueba genética definitiva, pero para nosotros es un sello de lacre en la piel. Es la costura biológica con la que el cuerpo protesta contra la pérdida del papel. Los expedientes se pudren en los sótanos de los juzgados del interior; las fotografías se desvanecen con la humedad del invierno rioplatense; pero la marca persiste, saltando generaciones, reclamando su lugar en el presente. El cuerpo es el verdadero archivo indestructible.',
+    quote: '"Herede de varias generaciones los rasgos que me conectan e identifican con ellos, pero tambien con los otros."',
+    narrative: 'El cuerpo tambien es un archivo vivo permamente de nuestras herencias. Puedo reconocerme en mi madre, en mis hermanos, y gracias a los relatos me puedo reconocer en mi abuela, mi bisabuela, y probablemente muchas lineas mas de las que se perdio cualquier tipo de registro. Pero seguro hay cosas que quedaron marcadas, como nuestros cuerpos hablan cuando volvemos al mismo contacto con la naturaleza.',
     metadata: 'REGISTRO 03 — MARCA COMPARTIDA / PERSISTENCIA CORPORAL',
     interactiveType: 'birthmark'
   },
@@ -69,7 +69,7 @@ const MODAL_DATA: Record<string, ModalContent> = {
     title: 'El Territorio Cosido',
     subtitle: 'GEOGRAFÍAS DE LO INDOCUMENTADO',
     quote: '"El Uruguay no es un mapa político: es un tapiz de venas fluviales y cicatrices de campaña."',
-    narrative: 'Nuestro territorio fue habitado por comunidades enteras mucho antes de que existieran los límites departamentales de 1830. Al bordar el mapa con hilos rojos, no dibujo divisiones limítrofes: dibujo caminos de escape, hilos de agua limpia, cicatrices de la campaña y arroyos que llevan sangre antigua. Cada puntada es una sutura sobre un territorio herido por el olvido planificado y la asimilación forzada. La tierra recuerda el peso de los pasos de nuestros ancestros antes de que nosotros aprendiéramos a nombrar sus lugares. Bordar es un acto de soberanía íntima, una forma de remapear la pertenencia.',
+    narrative: 'Nuestro territorio fue habitado por comunidades enteras mucho antes de que existieran los límites departamentales de 1830. Al bordar el mapa con hilos rojos, no dibujo divisiones limítrofes, sino que dibujo caminos de escape, hilos de agua limpia, cicatrices de la campaña y arroyos que llevan sangre antigua. Cada puntada es una sutura sobre un territorio herido por el olvido planificado y la asimilación forzada. La tierra recuerda el peso de los pasos de nuestros ancestros antes de que nosotros aprendiéramos a nombrar sus lugares. Bordar es un acto de soberanía íntima, una forma de remapear la pertenencia.',
     metadata: 'REGISTRO 04 — RÍOS Y COSTURAS / CARTOGRAFÍA RECONSTRUIDA',
     interactiveType: 'rivers'
   }
@@ -1116,7 +1116,7 @@ export default function App() {
             
             {/* Required subtext phrase */}
             <p className="font-display font-bold tracking-tight text-xl sm:text-2xl md:text-3xl lg:text-4xl text-charcoal/90 leading-tight max-w-4xl border-l-2 border-charcoal/20 pl-6 my-10">
-              Empiezo por mí porque antes de mí hay huecos.
+              Empiezo por mí, porque hay tramas que merecen volver a construirse.
             </p>
             
             {/* Beautiful structured index of the core poetic phrases requested */}
@@ -1128,7 +1128,7 @@ export default function App() {
               >
                 <span className="font-mono text-[8px] text-ochre tracking-widest">[ 01 ]</span>
                 <span className="font-display font-extrabold text-[11px] uppercase tracking-wider text-charcoal group-hover:text-ochre transition-colors duration-300">La persistencia</span>
-                <p className="font-serif text-xs text-charcoal/60">"Lo que no fue archivado persiste."</p>
+                <p className="text-xs text-charcoal/60">"Lo que no fue archivado persiste."</p>
               </div>
               
               <div 
@@ -1138,7 +1138,7 @@ export default function App() {
               >
                 <span className="font-mono text-[8px] text-ochre tracking-widest">[ 02 ]</span>
                 <span className="font-display font-extrabold text-[11px] uppercase tracking-wider text-charcoal group-hover:text-ochre transition-colors duration-300">La memoria vegetal</span>
-                <p className="font-serif text-xs text-charcoal/60">"La tierra recuerda antes que el nombre."</p>
+                <p className="text-xs text-charcoal/60">"La tierra recuerda antes que el nombre."</p>
               </div>
               
               <div 
@@ -1148,7 +1148,7 @@ export default function App() {
               >
                 <span className="font-mono text-[8px] text-ochre tracking-widest">[ 03 ]</span>
                 <span className="font-display font-extrabold text-[11px] uppercase tracking-wider text-charcoal group-hover:text-ochre transition-colors duration-300">El archivo celular</span>
-                <p className="font-serif text-xs text-charcoal/60">"Hay memorias que el cuerpo conserva."</p>
+                <p className="text-xs text-charcoal/60">"Hay memorias que el cuerpo conserva."</p>
               </div>
               
               <div 
@@ -1158,7 +1158,7 @@ export default function App() {
               >
                 <span className="font-mono text-[8px] text-ochre tracking-widest">[ 04 ]</span>
                 <span className="font-display font-extrabold text-[11px] uppercase tracking-wider text-charcoal group-hover:text-ochre transition-colors duration-300">La sutura</span>
-                <p className="font-serif text-xs text-charcoal/60">"Lo roto puede coserse."</p>
+                <p className="text-xs text-charcoal/60">"Lo roto puede coserse."</p>
               </div>
               
               <div 
@@ -1168,12 +1168,12 @@ export default function App() {
               >
                 <span className="font-mono text-[8px] text-ochre tracking-widest">[ 05 ]</span>
                 <span className="font-display font-extrabold text-[11px] uppercase tracking-wider text-charcoal group-hover:text-ochre transition-colors duration-300">Los fragmentos</span>
-                <p className="font-serif text-xs text-charcoal/60">"No heredé un archivo. Heredé fragmentos."</p>
+                <p className="text-xs text-charcoal/60">"No heredé un archivo. Heredé fragmentos."</p>
               </div>
             </div>
           </div>
 
-          <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-6 pt-6">
+          {/*<div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-6 pt-6">
             <div className="max-w-md">
               <p className="font-sans text-[11px] text-charcoal/50 leading-relaxed tracking-wider">
                 Desciende verticalmente por el linaje. La costura biológica y el territorio sostienen el vacío donde las actas callaron.
@@ -1183,7 +1183,7 @@ export default function App() {
               <span className="font-mono text-[8px] tracking-[0.2em] text-ochre uppercase">Navegación vertical continua</span>
               <div className="w-16 h-[1px] bg-ochre/35 animate-pulse" />
             </div>
-          </div>
+          </div>*/}
         </section>
 
         {/* --------------------------------------------------------------------------------- */}
@@ -1203,7 +1203,7 @@ export default function App() {
                 EL ARCHIVO<br />VEGETAL.
               </h2>
               <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/85 mb-8 max-w-md">
-                El gomero de mi patio de la infancia no fue una simple planta de adorno: fue un testigo biológico custodio del silencio familiar. Sus hojas carnosas actúan hoy como placas fotosensibles de revelado vegetal, sustituyendo al papel que nunca heredamos.
+                Todo lo que fructificó vino de la tierra. Mis primeros recuerdos partieron de dos árboles que marcaron mi curiosidad por el mundo: el gomero y el transparente. El gomero se tornó un testigo que brindaba la confianza de jugar y soltarme, y el transparente me daba la belleza y las herramientas creativas para explorar el mundo. Desde allí, todo lo que signifique tierra, verde, agua, semillas, me va a recordar de dónde vengo y a dónde voy. En lo vegetal hay memoria, y en ella quiero inscribir los pequeños homenajes. 
               </p>
               
               <div>
@@ -1250,7 +1250,7 @@ export default function App() {
 
                 {/* Archival precise labels */}
                 <div className="absolute -bottom-6 right-3 bg-parchment px-3 py-1 border border-charcoal/10 rounded-full font-mono text-[7px] tracking-[0.18em] text-ochre uppercase shadow-md z-10">
-                  TECNOLOGÍA: ANTOTIPIA / CLOROTIPIA (FICUS ELASTICA)
+                  CLOROTIPIA (FICUS ELASTICA)
                 </div>
               </div>
             </div>
@@ -1267,8 +1267,8 @@ export default function App() {
         >
           <div className="w-full text-center max-w-3xl mx-auto mb-16">
             <span className="font-mono text-[8px] tracking-[0.35em] text-ochre uppercase block mb-4">REACCIONES DE LA MEMORIA</span>
-            <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-charcoal/90 leading-relaxed">
-              "La memoria es un reactivo químico. Dos capas de historia conviven un instante antes de disolverse."
+            <p className="text-2xl sm:text-3xl md:text-4xl text-charcoal/90 leading-relaxed">
+              "La memoria reacciona al igual que una hoja expuesta al sol, alimentarla le da información y fortalece sus redes."
             </p>
           </div>
 
@@ -1307,22 +1307,22 @@ export default function App() {
                 {/* Tech tag positioned cleanly outside leaf overlay */}
                 <div className="absolute -bottom-6 left-3 bg-parchment border border-charcoal/10 px-3 py-1 rounded-full text-[7px] font-mono tracking-widest text-ochre uppercase flex items-center gap-2 shadow-md">
                   <Sparkles size={9} className="text-ochre animate-spin" />
-                  <span>REVELADO DE CLOROTIPIA EN TIEMPO REAL</span>
+                  <span>CUANDO LA IMAGEN ES EL RELATO</span>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-6 flex flex-col justify-center">
-              <span className="font-mono text-[8px] tracking-[0.2em] text-ochre uppercase mb-3 block">[ REVELADO DE CLOROTIPIA ]</span>
-              <h3 className="font-serif text-3xl text-charcoal mb-5 leading-tight">La luz solar como reactivo químico</h3>
+              <span className="font-mono text-[8px] tracking-[0.2em] text-ochre uppercase mb-3 block">[ REVELADO ]</span>
+              <h3 className="text-3xl text-charcoal mb-5 leading-tight">Cuando mirar las redes a la luz revelan el entramado</h3>
               <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/70 mb-8">
-                Al desplazarte por la página, simulas la exposición solar sobre la hoja. La clorofila verde y viva reacciona y se desvanece lentamente bajo el reactivo de la luz, revelando el retrato infantil impreso sobre la superficie vegetal (clorotipia natural). El recuerdo, antes oculto e indocumentado, brota del propio tejido de la planta.
+                Cuando crecí, pude comprender la construccion familiar pero tambien empece a notar aquellas hojas que ya habian caido, que no estaban cerca, de las cuales no habia mucha informacion. Esas porciones de historia tambien formaron parte del entramado, una herencia ausente que demanda y exige ser reconstruida.
               </p>
               
               <div className="p-5 border-l-2 border-charcoal/30 bg-parchment/60 rounded-xl">
                 <p className="font-mono text-[9px] tracking-widest text-charcoal/50 uppercase mb-1.5">PERSISTENCIA DE LOS RESTOS</p>
                 <p className="font-sans text-[11px] text-charcoal/70 leading-relaxed">
-                  Dado que el relato oficial uruguayo invisibilizó a las comunidades indígenas, la reconstrucción requiere amalgamar la biología viva con los jirones del papel que sobrevivieron.
+                  Dado que el relato oficial uruguayo invisibilizó a los pueblos originarios, la reconstrucción requiere de mucha fuerza de rescate de datos a traves del relato y de la memoria adquirida en las cosas que aun realizamos en el presente como herencia cultural.
                 </p>
               </div>
             </div>
@@ -1378,7 +1378,7 @@ export default function App() {
                 LA PALABRA<br />SUSURRADA.
               </h2>
               <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/85 mb-8 max-w-md">
-                Donde el Estado trazó actas oficiales que declararon extinto un linaje, la memoria de mi sangre indígena persiste refugiada en los murmullos de cocina de mi madre y mi abuela. Relatos susurrados sobre hojas curativas y orígenes fluviales, transmitidos en el calor del café.
+                Donde el Estado trazó actas oficiales que declararon extinto un linaje, la memoria de mi sangre  persiste en aquello que mi madre, su madre y muchas mas madres forjaron y hoy me tocan, en este tejido de datos pero que apuestan a futuro. 
               </p>
               
               <div>
@@ -1415,7 +1415,7 @@ export default function App() {
                 EL ARCHIVO<br />DE LA PIEL.
               </h2>
               <p className="font-sans text-xs md:text-sm leading-relaxed text-charcoal/85 mb-8 max-w-md">
-                Una mancha arcillosa en la base del cuello, compartida de forma idéntica por mi madre, mi hermano y yo. Esta pigmentación persistente constituye nuestra partida de filiación biológica incontestable. El cuerpo deviene archivo indestructible contra el olvido.
+                El cuerpo habla mas alla de lo que nosotros hayamos podido relatar sobre nuestras vidas y las anteriores generaciones. Pero hay algo que no perdimos y que nos identifica y nos une. Manchas, ojos, pieles, pelo, que tambien cuentan historias mas alla de los relatos.
               </p>
               
               <div>
@@ -1586,7 +1586,7 @@ export default function App() {
             </form>
 
             {/* Live Memories List Column */}
-            <div className="lg:col-span-7 flex flex-col gap-4 h-[350px] overflow-y-auto pr-2 custom-scrollbar">
+            {/*<div className="lg:col-span-7 flex flex-col gap-4 h-[350px] overflow-y-auto pr-2 custom-scrollbar">
               <span className="font-mono text-[8px] text-ochre block uppercase tracking-widest font-bold mb-1 sticky top-0 bg-[#f7f4ec]/95 py-1 z-10">Registros Recientes</span>
               
               <div className="flex flex-col gap-3">
@@ -1605,7 +1605,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>*/}
           </div>
         </section>
 
@@ -1701,7 +1701,7 @@ export default function App() {
                   {activeModal.subtitle}
                 </h4>
 
-                <p className="font-serif text-sm text-charcoal/90 mb-5 border-l-2 border-ochre/40 pl-4 py-1 leading-relaxed">
+                <p className="text-sm text-charcoal/90 mb-5 border-l-2 border-ochre/40 pl-4 py-1 leading-relaxed">
                   {activeModal.quote}
                 </p>
 
@@ -1726,8 +1726,8 @@ export default function App() {
                     <span className="font-mono text-[8px] tracking-[0.22em] text-charcoal/70 uppercase animate-[pulse_2s_infinite] relative z-10">
                       SINCRONIZA TU RESPIRACIÓN...
                     </span>
-                    <span className="font-serif text-xs text-charcoal/50 mt-14 relative z-10">
-                      "Inhala el silencio, exhala la savia."
+                    <span className="text-sm text-charcoal/50 mt-14 relative z-10">
+                      "Inhala e imagina un lugar fresco por la sombra de tu arbol preferido"
                     </span>
                   </div>
                 )}
