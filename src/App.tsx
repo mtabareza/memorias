@@ -69,7 +69,7 @@ const MODAL_DATA: Record<string, ModalContent> = {
     title: 'El Territorio Cosido',
     subtitle: 'GEOGRAFÍAS DE LO INDOCUMENTADO',
     quote: '"El Uruguay no es un mapa político: es un tapiz de venas fluviales y cicatrices de campaña."',
-    narrative: 'Nuestro territorio fue habitado por comunidades enteras mucho antes de que existieran los límites departamentales de 1830. Al bordar el mapa con hilos rojos, no dibujo divisiones limítrofes, sino que dibujo caminos de escape, hilos de agua limpia, cicatrices de la campaña y arroyos que llevan sangre antigua. Cada puntada es una sutura sobre un territorio herido por el olvido planificado y la asimilación forzada. La tierra recuerda el peso de los pasos de nuestros ancestros antes de que nosotros aprendiéramos a nombrar sus lugares. Bordar es un acto de soberanía íntima, una forma de remapear la pertenencia.',
+    narrative: 'Nuestro territorio fue habitado por comunidades enteras mucho antes de que existieran los límites departamentales de 1830. Al bordar el mapa con hilos rojos, no dibujo divisiones limítrofes, sino que dibujo caminos de escape, hilos de agua limpia, cicatrices de la campaña y arroyos que llevan sangre antigua. Cada puntada es una sutura sobre un territorio herido por el olvido planificado y la asimilación forzada. La tierra recuerda el peso de los pasos de nuestros ancestros antes de que nosotros aprendiéramos a nombrar sus lugares. Bordar es un acto de soberanía íntima, una forma de remapear la pertenencia. ',
     metadata: 'REGISTRO 04 — RÍOS Y COSTURAS / CARTOGRAFÍA RECONSTRUIDA',
     interactiveType: 'rivers'
   }
